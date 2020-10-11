@@ -19,7 +19,7 @@ jobs:
       - run: mvn clean package
 
       # build and push docker image to docker hub
-      - run: mvn clean compile jib:build -Dimage=api/springboot-api:1.0.0
+      - run: mvn clean compile jib:build -Dimage=joset0899/api-rest:1.0.0
 
       # store raw contents of src code
       - store_artifacts:
