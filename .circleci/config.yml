@@ -10,25 +10,10 @@ jobs:
     steps:
       # git pull
       - checkout
-
-      # setup testing env
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run:
           name: Login to DockerHub
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - api-rest-k1-v1-{{ checksum "pom.xml" }}
-
       - run: mvn dependency:go-offline
-
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: api-rest-k1-v1-{{ checksum "pom.xml" }}
 
       # package into a jar
       - run: mvn clean package
